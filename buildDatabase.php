@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "root", "21ooamlftw", "spotigraph");
+    $conn = new mysqli("www.db4free.net", "spotiuser", "se4rft6yh", "spotigraph", 3306);
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
