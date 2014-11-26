@@ -1,7 +1,7 @@
-<?php
-	session_start();
-	$userID = $_SESSION['tableKey'];
-    $conn = new mysqli("localhost", "root", "21ooamlftw", "spotigraph");
+ysql_<?php
+    session_start();
+    $userID = $_SESSION['tableKey'];
+    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -20,7 +20,7 @@
         // output data of each row
         $dateArray = array();
         while ($row = mysqli_fetch_assoc($result)){
-            $artist = mysql_real_escape_string($row["artistName"]);
+            $artist = mysql_escape_string($row["artistName"]);
             $playDate = date("d-m-y", strtotime($row["publishTime"]));
             $dateResult = $conn->query("SELECT `" . $playDate ."` FROM " 
                 . $userID . "_graphdata");
@@ -68,7 +68,7 @@
             for($k=0; $k < count($dateArray); $k++){
                 $total += $totalRow[$dateArray[$k]];
             }
-            $theArtist = mysql_real_escape_string($totalRow["artist"]);
+            $theArtist = mysql_escape_string($totalRow["artist"]);
             $updateArtistTotal = "UPDATE " . $userID . "_graphdata SET total=$total 
                 WHERE artist='$theArtist'";
             $conn->query($updateArtistTotal);

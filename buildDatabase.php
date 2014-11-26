@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "root", "21ooamlftw", "spotigraph");
+    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -74,19 +74,18 @@
 
                         $allSongIDs = $songObject->getPropertyNames();
                         foreach ($allSongIDs as $theID) {
-                            $songName =  mysql_real_escape_string($songObject->getProperty($theID)
+                            $songName =  mysql_escape_string($songObject->getProperty($theID)
                                     ->getProperty('title'));
-                            $artistName = mysql_real_escape_string($songObject->getProperty($theID)
+                            $artistName = mysql_escape_string($songObject->getProperty($theID)
                                     ->getProperty('data')->getProperty('musician')->getProperty(0)
                                     ->getProperty('name'));
-                            $albumName = mysql_real_escape_string($songObject->getProperty($theID)
+                            $albumName = mysql_escape_string($songObject->getProperty($theID)
                                     ->getProperty('data')->getProperty('album')->getProperty(0)
                                     ->getProperty('url')->getProperty('title'));
-                            $albumURL = mysql_real_escape_string($songObject->getProperty($theID)
+                            $albumURL = mysql_escape_string($songObject->getProperty($theID)
                                     ->getProperty('image')->getProperty(0)->getProperty('url'));
-                            $songURL = mysql_real_escape_string($songObject->getProperty($theID)
+                            $songURL = mysql_escape_string($songObject->getProperty($theID)
                                     ->getProperty('url'));
-
 
                             $musicHistory = "UPDATE " . $userID . "_musicdata SET songName='$songName', 
                                 artistName='$artistName', albumName='$albumName', 
