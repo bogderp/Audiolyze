@@ -1,7 +1,7 @@
 <?php
-	session_start();
-	$userID = $_SESSION['tableKey'];
-    $conn = new mysqli("localhost", "root", "21ooamlftw", "spotigraph");
+    session_start();
+    $userID = $_SESSION['tableKey'];
+    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
