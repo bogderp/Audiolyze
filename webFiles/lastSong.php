@@ -10,7 +10,6 @@
 
     $result = $conn->query("SELECT publishTime, songName, artistName, 
     	albumURL FROM " . $userID . "_musicdata ORDER BY publishTime DESC");
-
     $lastArray = array();
     if (mysqli_num_rows($result) > 0) {
         // output data of each row

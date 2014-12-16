@@ -1,6 +1,6 @@
-ysql_<?php
-    session_start();
-    $userID = $_SESSION['tableKey'];
+<?php
+	session_start();
+	$userID = $_SESSION['tableKey'];
     $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
     // Check connection
     if ($conn->connect_error) {
@@ -15,13 +15,13 @@ ysql_<?php
 
     $result = $conn->query("SELECT publishTime, artistName FROM " 
         . $userID . "_musicdata ORDER BY publishTime DESC");
-
+    
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         $dateArray = array();
         while ($row = mysqli_fetch_assoc($result)){
             $artist = mysql_escape_string($row["artistName"]);
-            $playDate = date("d-m-y", strtotime($row["publishTime"]));
+            $playDate = date("d-m-o", strtotime($row["publishTime"]));
             $dateResult = $conn->query("SELECT `" . $playDate ."` FROM " 
                 . $userID . "_graphdata");
             if(mysqli_num_rows($dateResult) < 1){
@@ -75,4 +75,5 @@ ysql_<?php
             $total = 0;
         }
     } 
+    $conn->close();
 ?>

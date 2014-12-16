@@ -5,7 +5,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } 
-
+    $token = $_SESSION['token'];
     require_once('facebook/autoload.php');
 
     use Facebook\FacebookSession; 
@@ -16,19 +16,13 @@
 
     FacebookSession::setDefaultApplication('171546376229575', '41345f543846339dba9079ddf0157df9');
 
-    $helper = new FacebookJavaScriptLoginHelper();
-    try {
-        $session = $helper->getSession();
-    } catch(FacebookRequestException $ex) {
-        // When Facebook returns an error
-    } catch(\Exception $ex) {
-        // When validation fails or other local issues
-    } 
+    $session = new FacebookSession($token);
 
     if($session) {
         try {
+            $userPlays = $_GET['data'];
             $initialReq = new FacebookRequest(
-                $session, 'GET', '/me/music.listens?limit=3000');
+                $session, 'GET', '/me/music.listens?limit=' . $userPlays . '');
             $response = $initialReq->execute();
             $reqObject = $response->getGraphObject();               
 
@@ -36,8 +30,6 @@
             $total = 0;
             $userID = $reqObject->getProperty('data')->getProperty(0)->getProperty('from')
                 ->getProperty('id') . "";
-
-            $_SESSION['tableKey'] = $userID;
 
             $sql = "CREATE TABLE " . $userID . "_musicdata (
                 playID VARCHAR(100) NULL,

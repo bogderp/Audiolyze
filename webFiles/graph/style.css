@@ -1,0 +1,47 @@
+body {
+  overflow-y:scroll;
+  font-family: arial;
+}
+
+svg text {
+    fill: white;
+}
+
+text {
+  font: 12px sans-serif;
+}
+
+.chart {
+  float:center;
+  height: 500px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2em;
+}
+.chart.full {
+  width: 100%;
+}
+
+.chart.selected {
+  width: 100% !important;
+}
+
+.navigation a{
+  margin-right: 1em;
+}
+
+.navigation {
+  margin-bottom: 1em;
+}
+
+.tick line {
+  display:none;
+}
+
+#graphP {
+  color:black;
+}
+#graphH3{
+  font-size: 80%;
+  color:black;
+}
