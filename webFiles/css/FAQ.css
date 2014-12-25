@@ -12,61 +12,49 @@ body {
     color: white;
 }
 @media (max-width: 640px) {
-    p#directions {
-        padding-top: 55%;
-        color:white;
+    .lead {
+        padding-bottom: 40px;
     }
-    #thegraph {
-        display:none;
-    }
-
 }
 @media (min-width: 641px) {
     main#content {
         font-size: 14px;
     }
-    p.lead {
+    .question {
         font-size: 18px;
     }
-    h1 {
-        font-size: 25px;
+    .lead {
+        font-size: 20px;
+        padding-bottom: 40px;
     }
-
 }
 @media (min-width: 1025px) {
     main#content {
         font-size: 15px;
     }
-    p.lead {
-        font-size: 20px;
+    .question {
+        font-size: 18px;
     }
-    h1 {
-        font-size: 35px;
+    .lead {
+        padding-bottom: 40px;
     }
-
 }
 @media (min-width: 1441px) {
     main#content {
         font-size: 30px;
     }
-    p.lead {
-        font-size: 35px;
+    .question {
+        font-size: 26px;
     }
-    h1 {
-        font-size: 50px;
+    .lead {
+        padding-bottom: 60px;
     }
-
 }
 main#content {
     padding: 20px 15px;
     color:white;
     text-align: center;          
-    background-image: url("../imgFiles/backdrop.jpg");
+    background-image: url("../../imgFiles/FAQbackdrop.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
-}
-#thegraph {
-    color:white;
-    opacity:0;
-    font-size: 150%;
 }
