@@ -83,6 +83,7 @@
 	        <div id="lastsong" style="display:none"></div>
 	        
 	        <div id="playstat" style="padding-top: 20px; display:none"></div>
+            <div id="playstat2" style="padding-top: 20px; display:none"></div>
 	    </div><!-- /.bodyContainer -->    
         
         <div class="fb-like-box" 

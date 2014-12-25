@@ -87,7 +87,7 @@
                 $shareCode = mysql_escape_string("?i=" . base_convert($userID, 13, 18));
                 
                 $userInfo = "INSERT INTO userData (name, userID, currentLoginTime, shareCode)
-                    VALUES ('$userName', '$userID', '$currentTime', $shareCode)";
+                    VALUES ('$userName', '$userID', '$currentTime', '$shareCode')";
                 $conn->query($userInfo);
                 //buildDatabase
                 //formatGraphData

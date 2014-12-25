@@ -40,8 +40,10 @@ function defaultChartConfig(container, data, useGuideline) {
     nv.utils.windowResize(chart.update);
 
     return chart;
-  });
+  }); 
 }
+
+
 
 function toD3Format() {
     $.ajax({
@@ -65,6 +67,10 @@ function toD3Format() {
     });    
 };
 
+function restOfArtists(data) {
+
+}
+
 function topArtists() {
     $.ajax({
         url: "webFiles/php/topArtists.php",
@@ -75,25 +81,50 @@ function topArtists() {
             totalPlays = data[data.length-3];
             newestDate = new Date(data[data.length-2][0]);
             oldestDate = new Date(data[data.length-2][1]);
+
+            if (newestDate.toDateString() === oldestDate.toDateString()) {
+                dateSpan = "today " + oldestDate.toDateString();
+            } else {
+                dateSpan = "from " + oldestDate.toDateString() + " to " + newestDate.toDateString();
+            }
+
             avgTimePlays = data[data.length-1];
-            document.getElementById('playstat').innerHTML = 
-                ("Top Five Artists' Number of Plays " +  
-                "from " + oldestDate.toDateString() + " to " + newestDate.toDateString() + "<br>" +
-                "1. " + data[0][0] + " was played " + data[0][1] + " times! " + 
-                    "That\'s " + (data[0][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
-                "2. " + data[1][0] + " was played " + data[1][1] + " times! " + 
-                    "That\'s " + (data[1][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
-                "3. " + data[2][0] + " was played " + data[2][1] + " times! " + 
-                    "That\'s " + (data[2][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
-                "4. " + data[3][0] + " was played " + data[3][1] + " times! " + 
-                    "That\'s " + (data[3][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
-                "5. " + data[4][0] + " was played " + data[4][1] + " times! " +
-                    "That\'s " + (data[4][1]/totalPlays*100).toFixed(2) + "% of Plays <br></br>" +
-                "On average, in the past " + totalPlays + " listens they listened to a song every " +
+
+            if (data.length > 8) {
+                document.getElementById('playstat').innerHTML = 
+                    ("Top 5 Artists' Number of Plays " +  
+                    dateSpan + "<br>" +
+                    "1. " + data[0][0] + " was played " + data[0][1] + " times! " + 
+                        "That\'s " + (data[0][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
+                    "2. " + data[1][0] + " was played " + data[1][1] + " times! " + 
+                        "That\'s " + (data[1][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
+                    "3. " + data[2][0] + " was played " + data[2][1] + " times! " + 
+                        "That\'s " + (data[2][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
+                    "4. " + data[3][0] + " was played " + data[3][1] + " times! " + 
+                        "That\'s " + (data[3][1]/totalPlays*100).toFixed(2) + "% of Plays <br>" + 
+                    "5. " + data[4][0] + " was played " + data[4][1] + " times! " +
+                        "That\'s " + (data[4][1]/totalPlays*100).toFixed(2) + "% of Plays");
+            } else if (data.length == 5) {
+                document.getElementById('playstat').innerHTML = ("No Top Artist data to Display!");
+            } else {
+                playStat = "Top " + (data.length-4) + " Artists' Number of Plays " + dateSpan + "<br>";
+                
+                for (i=0; i< data.length-4; i++) {
+                    playStat += (i+1) + ". " + data[i][0] + " was played " + data[i][1] + " times! " + 
+                        "That\'s " + (data[i][1]/totalPlays*100).toFixed(2) + "% of Plays <br>";
+                }
+                document.getElementById('playstat').innerHTML = (playStat);
+            }
+
+            document.getElementById('playstat2').innerHTML = 
+                ("On average, in the past " + totalPlays + " listens they listened to a song every " +
                 (avgTimePlays/60).toFixed(2) + " minutes!");
             $("#thegraph").css('opacity',1);
             $('#lastsong').fadeIn('slow', function () {
                 $('#playstat').fadeIn('slow');
+                if (data.length > 5) {
+                    $('#playstat2').fadeIn('slow');
+                }
             });
             $('.fb-like-box').fadeIn('slow');
         }
