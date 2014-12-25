@@ -1,12 +1,12 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
+    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "audiolyze");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } 
     $token = $_SESSION['token'];
-    require_once('facebook/autoload.php');
+    require_once('../facebook/autoload.php');
 
     use Facebook\FacebookSession; 
     use Facebook\FacebookJavaScriptLoginHelper;

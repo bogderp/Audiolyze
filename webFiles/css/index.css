@@ -57,11 +57,20 @@ body {
     }
 
 }
+
+.dropdown-menu {
+    background:black; 
+    color:white; 
+}
+
+.dropdown-menu li>a{color:white; }
+.dropdown-menu li>a:hover{background:white; }
+
 main#content {
     padding: 20px 15px;
     color:white;
     text-align: center;          
-    background-image: url("../imgFiles/backdrop.jpg");
+    background-image: url("../../imgFiles/backdrop.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }

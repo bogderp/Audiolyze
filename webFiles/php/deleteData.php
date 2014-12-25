@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
+    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "audiolyze");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);

@@ -1,9 +1,9 @@
 function dynamicHeight() {
     var height = $(window).height();
-    heightGraph = parseInt(height * 0.90) + 'px';
+    //heightGraph = parseInt(height * 0.90) + 'px';
     height = parseInt(height) + 'px';
     $("main").css('height',height);
-    $(".chart.full").css('height',heightGraph);
+    //$(".chart.full").css('height',heightGraph);
 }
 
 var colors = d3.scale.category20();
@@ -37,14 +37,14 @@ function defaultChartConfig(container, data, useGuideline) {
 
 function toD3Format() {
     $.ajax({
-        url: "webFiles/toD3Format.php",
+        url: "webFiles/php/toD3Format.php",
         dataType: 'json',
         success: function(data) {
             var d3formatted = [ ];
             for(i=0; i<data.length; i++){
                 obj = {
                     "key": data[i][0],
-                    "values": []
+                    "values": [],
                 };
                 for(m=1; m<data[i].length; m++){
                     obj.values.push(data[i][m]);
@@ -59,7 +59,7 @@ function toD3Format() {
 
 function topArtists() {
     $.ajax({
-        url: "webFiles/topArtists.php",
+        url: "webFiles/php/topArtists.php",
         dataType: 'json',
         success: function(data) {
             toD3Format();
@@ -99,7 +99,7 @@ function topArtists() {
 
 function avgTimeBtwnPlays() {
     $.ajax({
-        url: "webFiles/avgTimeBtwnPlays.php",
+        url: "webFiles/php/avgTimeBtwnPlays.php",
         success: function() {
             topArtists();
         }
@@ -108,7 +108,7 @@ function avgTimeBtwnPlays() {
 
 function formatGraphTable() {
     $.ajax({
-        url: "webFiles/formatGraphTable.php",
+        url: "webFiles/php/formatGraphTable.php",
         success: function() {
             console.log("done");
             avgTimeBtwnPlays();
@@ -118,7 +118,7 @@ function formatGraphTable() {
 
 function lastSong() {
     $.ajax({
-            url: "webFiles/lastSong.php",
+            url: "webFiles/php/lastSong.php",
             success: function(data) {
                 var lastSongArray = JSON.parse(data);
                 d = new Date(lastSongArray[1]);
@@ -134,7 +134,7 @@ function lastSong() {
 
 function buildMusicTable (plays) {
     $.ajax({
-            url: "webFiles/buildMusicTable.php",
+            url: "webFiles/php/buildMusicTable.php",
             data: {'data':plays},
             success: function() {
                 $('.loading').fadeOut('fast');
@@ -205,17 +205,23 @@ function testAPI() {
         checkPermissions();
     });
 }
-    
+
+function fbShare (link) {
+    FB.ui({
+      method: 'share',
+      href: link,
+    }, function(response){});
+}
+
 function checkPermissions(){
-    $('#fblogin').fadeOut('slow');
     FB.api(
         "/me/permissions",
         function (response) {
-            if (response.data[0].status == "granted" && response.data[1].status == "granted" 
-                && response.data[2].status == "granted") {
+            if (response.data.length == 4) {
+                $('#fblogin').fadeOut('slow');
                 $('#grantPerm').fadeOut('slow');
                 $.ajax({
-                    url: "webFiles/router.php",
+                    url: "webFiles/php/router.php",
                     dataType: 'json',
                     success: function(data) {
                         console.log(data[0]);
@@ -229,6 +235,9 @@ function checkPermissions(){
                             $('#directions').fadeIn('slow', function() {
                             });
                             $('#addToTable').fadeIn('slow');
+                            $('#fbShare').attr("onclick","fbShare('http://www.audiolyze.com/share.php"  + data[2] + "')");
+                            $('#viewStats').attr("href","http://www.audiolyze.com/share.php" + data[2]);
+                            $('#statsDropdown').fadeIn('slow');
                         } else if (data[0] == 2){
                             lastSong();
                             formatGraphTable();
@@ -244,6 +253,7 @@ function checkPermissions(){
                     }
                 }); 
             } else {
+                console.log("asdkf;lsdf");
                 $('#grantPerm').fadeIn('slow');
             }
         }
@@ -266,7 +276,7 @@ $(document).ready(function(){
         });
 
         $.ajax({
-                url: "webFiles/buildMusicTable.php",
+                url: "webFiles/php/buildMusicTable.php",
                 data: {'data':userDefined},
                 success: function(data) {
                     console.log(data);
@@ -283,7 +293,7 @@ $(document).ready(function(){
         requestData = $(this).serialize();
         console.log(requestData);
         $.ajax({
-                url: "webFiles/request.php",
+                url: "webFiles/php/request.php",
                 type: "POST",
                 data: requestData,
                 success: function(data) {
@@ -304,7 +314,7 @@ $(document).ready(function(){
         $('#addToTable').fadeOut('slow', function() {
             $('.loading').fadeIn('slow');
             $.ajax({
-                url: "webFiles/addToMusicTable.php",
+                url: "webFiles/php/addToMusicTable.php",
                 success: function() { 
                     lastSong();
                     formatGraphTable();                    
@@ -312,6 +322,7 @@ $(document).ready(function(){
             }); 
         });
     })
+
 
     $('#removeData').click(function() {
         $('#status').fadeOut("slow");
@@ -322,7 +333,7 @@ $(document).ready(function(){
         $('.fb-like-box').fadeOut('slow');  
         $('#removeData').fadeOut('slow', function() {
             $.ajax({
-                url: "webFiles/deleteData.php",
+                url: "webFiles/php/deleteData.php",
                 success: function() { 
                     console.log("Everything Deleted");
                     FB.logout();

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	$userID = $_SESSION['tableKey'];
-    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "spotigraph");
+    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "audiolyze");
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -9,7 +9,7 @@
 
 	$sql = "SELECT `COLUMN_NAME` 
 		FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-		WHERE `TABLE_SCHEMA`='spotigraph' 
+		WHERE `TABLE_SCHEMA`='audiolyze' 
 		AND `TABLE_NAME`='" . $userID . "_graphdata'";
 
 	$topArtists = $_SESSION['topArtists'];
