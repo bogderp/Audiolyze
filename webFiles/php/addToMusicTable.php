@@ -93,7 +93,6 @@
                         } 
                     } else if($i > 0 && mysqli_num_rows($playResult) == 1) {
                         $nextRequest = substr($nextRequest,0,strlen($nextRequest)-1);
-                        echo $nextRequest;
                         try {  
                             $songReq = new FacebookRequest(
                                 $session, 'GET', $nextRequest);
@@ -144,6 +143,5 @@
 
         }
     }
-    $conn->query("DROP TABLE `" . $userID . "_graphdata`");
     $conn->close();
 ?>
