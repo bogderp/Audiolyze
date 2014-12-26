@@ -128,15 +128,25 @@ function avgTimeBtwnPlays() {
     });  
 }
 
-function formatGraphTable() {
+function buildGraphTable() {
     $.ajax({
-        url: "webFiles/php/formatGraphTable.php",
+        url: "webFiles/php/buildGraphTable.php",
         success: function() {
             console.log("done");
             avgTimeBtwnPlays();
         }
     }); 
 }  
+
+function addToGraphTable() {
+    $.ajax({
+        url: "webFiles/php/addToGraphTable.php",
+        success: function(data) {
+            console.log(data);
+            avgTimeBtwnPlays();
+        }
+    }); 
+} 
 
 function lastSong() {
     $.ajax({
@@ -154,18 +164,6 @@ function lastSong() {
         });
 }
 
-function buildMusicTable (plays) {
-    $.ajax({
-            url: "webFiles/php/buildMusicTable.php",
-            data: {'data':plays},
-            success: function() {
-                $('.loading').fadeOut('fast');
-                lastSong();
-                $('#lastsong').fadeIn('slow');
-                formatGraphTable();  
-            }
-    });          
-}  
 
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
@@ -262,7 +260,7 @@ function checkPermissions(){
                             $('#statsDropdown').fadeIn('slow');
                         } else if (data[0] == 2){
                             lastSong();
-                            formatGraphTable();
+                            buildGraphTable();
                         } else {
                             $('#directions').fadeOut('slow',function(){
                                 $('#directions').replaceWith("<p id=\"directions\" style=\"display:none\">" +
@@ -275,7 +273,6 @@ function checkPermissions(){
                     }
                 }); 
             } else {
-                console.log("asdkf;lsdf");
                 $('#grantPerm').fadeIn('slow');
             }
         }
@@ -305,7 +302,7 @@ $(document).ready(function(){
                     $('.loading').fadeOut('fast');
                     lastSong();
                     $('#lastsong').fadeIn('slow');
-                    formatGraphTable();  
+                    buildGraphTable();  
                 }
         });  
     });
@@ -337,9 +334,9 @@ $(document).ready(function(){
             $('.loading').fadeIn('slow');
             $.ajax({
                 url: "webFiles/php/addToMusicTable.php",
-                success: function() { 
+                success: function() {
                     lastSong();
-                    formatGraphTable();                    
+                    addToGraphTable();                    
                 }
             }); 
         });
