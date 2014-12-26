@@ -61,6 +61,13 @@
                 if (mysqli_num_rows($musicResult) == 1) {
                 	$graphResult = $conn->query("SHOW TABLES LIKE '" . $userID . "_graphdata'");
                 	if (mysqli_num_rows($graphResult) == 1) {
+                        $lastSongResult = $conn->query("SELECT songID FROM " 
+                            . $userID . "_musicdata ORDER BY publishTime DESC");
+                        $lastSongArray = mysqli_fetch_assoc($lastSongResult);
+                        $lastSong = $lastSongArray['songID'];
+                        $lastSongInfo = "UPDATE userData SET lastSong=$lastSong WHERE userID='$userID'";
+                        $conn->query($lastSongInfo);
+
                 		//lastSong
                 		//topArtists
                         array_push($reportArray, 1);
