@@ -48,14 +48,11 @@
             }
         }
         $dateString = "";
-        $dateSumString = "";
         for($i=0; $i < count($dateArray); $i++){
             if($i == count($dateArray)-1) {
                 $dateString .= "`$dateArray[$i]`";
-                $dateSumString .= "SUM(" . "$dateArray[$i]" . ")";
             } else {
                 $dateString .= "`$dateArray[$i]`" . ", ";
-                $dateSumString .= "SUM(" . "$dateArray[$i]" . "), ";
             }
         }
 
