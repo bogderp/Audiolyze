@@ -103,11 +103,12 @@ function topArtists() {
             }
 
             document.getElementById('playstat2').innerHTML = 
-                ("On average, in the past " + totalPlays + " listens they listened to a song every " +
+                ("On average, in the past " + totalPlays + " listens you listened to a song every " +
                 (avgTimePlays/60).toFixed(2) + " minutes!");
             $('.loading').fadeOut('slow');
             $('#lastsong').fadeIn('slow', function () {
                 $('#playstat').fadeIn('slow');
+                $('#playstat2').fadeIn('slow');
                 $("#thegraph").css('opacity',1);
                 $('html, body').animate({
                     scrollTop: $(".bodyContainer").offset().top
