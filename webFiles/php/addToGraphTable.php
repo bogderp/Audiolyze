@@ -28,6 +28,7 @@
 	$songResult = $conn->query("SELECT songID, publishTime, artistName FROM " 
 		. $userID . "_musicdata ORDER BY publishTime DESC");
 
+	$prevPlayDate = 'artist';
 	while ($songRow = mysqli_fetch_assoc($songResult)) {
 		if ($lastSong == $songRow['songID']) {break;} // song was already recorded in the graphDataTable, prevents duplicate.
 
@@ -50,7 +51,7 @@
             $conn->query($updateTable);
 		} else {
             $conn->query("ALTER TABLE " . $userID . "_graphdata ADD `" .
-            	$playDate ."` MEDIUMINT NOT NULL DEFAULT '0' AFTER `artist`");
+            	$playDate ."` MEDIUMINT NOT NULL DEFAULT '0' AFTER `" . $prevPlayDate . "`");
             $conn->query("UPDATE " . $userID . "_graphdata SET 
                 `" . $playDate . "`=1 WHERE artist='$songArtist'");
             
@@ -58,6 +59,7 @@
 			$updateTable = "UPDATE " . $userID .
 				"_graphdata SET total='$total' WHERE artist='$songArtist'";
             $conn->query($updateTable);
+            $prevPlayDate = $playDate;
 		}
 		$total = 0;
 	}
