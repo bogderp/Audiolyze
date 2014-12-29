@@ -114,7 +114,6 @@ function topArtists() {
                     scrollTop: $(".bodyContainer").offset().top
                 }, 2000);
             });
-            $('#removeData').fadeIn('slow');
             $('.fb-like-box').fadeIn('slow');
         }
     }); 
@@ -278,7 +277,26 @@ function checkPermissions(){
             }
         }
     );
-}            
+}     
+
+
+function removeData() {
+    $('#statsDropdown').fadeOut('slow');
+    $('#addToTable').fadeOut('slow');
+    $('#status').fadeOut('slow');
+    $.ajax({
+        url: "webFiles/php/deleteData.php",
+        success: function() { 
+            console.log("Everything Deleted");
+            FB.logout();
+            $('#fblogin').fadeIn('slow');
+            $('#directions').replaceWith("<p id=\"directions\" " +
+                "style=\"display:none\">All data has been deleted. <br> " +
+                "To start over please log in.</p>"); 
+            $('#directions').fadeIn('slow');
+        }
+    }); 
+}
 
 $(document).ready(function(){
     $(window).on('beforeunload', function() {
@@ -329,7 +347,6 @@ $(document).ready(function(){
         $('#directions').fadeOut('slow');
         $('#lastsong').fadeOut('slow');
         $('#playstat').fadeOut('slow');
-        $('#removeData').fadeOut('slow');
         $('.fb-like-box').fadeOut('slow');  
         $('#addToTable').fadeOut('slow', function() {
             $('.loading').fadeIn('slow');
@@ -343,27 +360,4 @@ $(document).ready(function(){
         });
     })
 
-
-    $('#removeData').click(function() {
-        $('#status').fadeOut("slow");
-        $('#directions').fadeOut('slow');
-        $('#addToTable').fadeOut('slow');
-        $('#lastsong').fadeOut('slow');
-        $('#playstat').fadeOut('slow');
-        $('.fb-like-box').fadeOut('slow');  
-        $('#removeData').fadeOut('slow', function() {
-            $.ajax({
-                url: "webFiles/php/deleteData.php",
-                success: function() { 
-                    console.log("Everything Deleted");
-                    FB.logout();
-                    $('#fblogin').fadeIn('slow');
-                    $('#directions').replaceWith("<p id=\"directions\" " +
-                        "style=\"display:none\">All data has been deleted. <br> " +
-                        "To start over please log in.</p>"); 
-                    $('#directions').fadeIn('slow');
-                }
-            }); 
-        });
-    })
 }); 
