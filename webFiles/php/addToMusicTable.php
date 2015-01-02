@@ -132,7 +132,7 @@
                 if(mysqli_num_rows($playResult) == 1){
                     $isTrue = false;
                 }
-                $plays = 'me/music.listens?limit=50&offset=' . '$offset';
+                $plays = '/me/music.listens?limit=50&offset=' . $offset;
                 $offset += 50;
             }
 
