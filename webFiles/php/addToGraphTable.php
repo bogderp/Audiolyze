@@ -25,12 +25,12 @@
 	$lastSongArray = mysqli_fetch_assoc($lastSongResult);
 	$lastSong = $lastSongArray['lastSong'];
 
-	$songResult = $conn->query("SELECT songID, publishTime, artistName FROM " 
+	$songResult = $conn->query("SELECT playID, publishTime, artistName FROM " 
 		. $userID . "_musicdata ORDER BY publishTime DESC");
 
 	$prevPlayDate = 'artist';
 	while ($songRow = mysqli_fetch_assoc($songResult)) {
-		if ($lastSong == $songRow['songID']) {break;} // song was already recorded in the graphDataTable, prevents duplicate.
+		if ($lastSong == $songRow['playID']) {break;} // song was already recorded in the graphDataTable, prevents duplicate.
 
 		$songArtist = $songRow['artistName'];
 		$totalResult = $conn->query("SELECT total FROM " 
@@ -38,7 +38,7 @@
 		$totalRow = mysqli_fetch_assoc($totalResult);
 		$total = $totalRow['total'];
 
-		$playDate = date("d-m-o", strtotime($songRow['publishTime']));
+		$playDate = date("d-m-Y", strtotime($songRow['publishTime']));
 		$dateResult = $conn->query("SELECT `" . $playDate 
 			. "` FROM " . $userID . "_graphdata WHERE artist='$songArtist'");
 		if (mysqli_num_rows($dateResult)) {

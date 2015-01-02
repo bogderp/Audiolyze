@@ -21,7 +21,7 @@
         $dateArray = array();
         while ($row = mysqli_fetch_assoc($result)){
             $artist = mysql_escape_string($row["artistName"]);
-            $playDate = date("d-m-o", strtotime($row["publishTime"]));
+            $playDate = date("d-m-Y", strtotime($row["publishTime"]));
             $dateResult = $conn->query("SELECT `" . $playDate ."` FROM " 
                 . $userID . "_graphdata");
             if(mysqli_num_rows($dateResult) < 1){
