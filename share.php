@@ -79,6 +79,16 @@
             </div>
         </div>  
 
+        <div id="dateContainer">
+            <form id="startEndDate">
+                <label id="startLabel"></label>
+                <label id="endLabel"></label>
+                <input id="startField" name="startField" type="text" placeholder="mm/dd/yyyy"/>
+                <div id="delete"><span id="x">x</span></div>
+                <input id="endField" name="endField" type="text" placeholder="mm/dd/yyyy"/>
+                <div id="delete2"><span id="x2">x</span></div>
+            </form>
+        </div>    
 	    <div class='chart full' id='thegraph'>Top Artists<svg></svg></div>    
 	    
 	     <div class="bodyContainer">
@@ -154,7 +164,7 @@
     <script src="webFiles/dist/js/bootstrap.min.js"></script>
     <script src="webFiles/js/d3.v3.js"></script>
     <script src="webFiles/js/nv.d3.js"></script>
-    <script src="webFiles/js/shareFunctions.js" type="text/javascript"></script>
+    <script src="webFiles/js/share.js" type="text/javascript"></script>
   </body>
 </html>
 
