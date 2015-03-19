@@ -1,8 +1,7 @@
 <?php
     session_start();
     include_once('webFiles/php/config.php');
-
-    $conn = new mysqli($host, $user, $user, $base);
+    $conn = new mysqli($host, $user, $pass, $base);
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);

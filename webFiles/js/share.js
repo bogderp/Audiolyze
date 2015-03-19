@@ -45,10 +45,12 @@ function defaultChartConfig(container, data, useGuideline) {
 
 
 
-function toD3Format() {
+function toD3Format(startDate, endDate) {
     $.ajax({
         url: "webFiles/php/toD3Format.php",
-        dataType: 'json',
+        data: {'startDate':startDate,'endDate':endDate},
+        type: "POST",
+        dataType: 'JSON',
         success: function(data) {
             var d3formatted = [ ];
             for(i=0; i<data.length; i++){
@@ -61,8 +63,8 @@ function toD3Format() {
                 };
                 d3formatted.push(obj);
             };
-            console.log(d3formatted);
             defaultChartConfig("thegraph", d3formatted); 
+            $('#thegraph').fadeTo('slow',1);
         }
     });    
 };
@@ -119,6 +121,7 @@ function topArtists() {
             document.getElementById('playstat2').innerHTML = 
                 ("On average, in the past " + totalPlays + " listens they listened to a song every " +
                 (avgTimePlays/60).toFixed(2) + " minutes!");
+            $("#dateContainer").fadeIn('slow');
             $("#thegraph").css('opacity',1);
             $('#lastsong').fadeIn('slow', function () {
                 $('#playstat').fadeIn('slow');
@@ -129,6 +132,27 @@ function topArtists() {
             $('.fb-like-box').fadeIn('slow');
         }
     }); 
+}
+
+var minStartDate = "";
+var validStartDate = "";
+var maxEndDate = "";
+var validEndDate = "";
+function getDateRange() {
+    $.ajax({
+        url: "webFiles/php/getDateRange.php",
+        dataType: "JSON",
+        success: function(data) {
+            minStartDate = data[0];
+            validStartDate = minStartDate;
+            var sDate = new Date(minStartDate*1000);
+            maxEndDate = data[1];
+            validEndDate = maxEndDate;
+            var eDate = new Date(maxEndDate*1000);
+            $('#startLabel').text("Please enter a date after " + (sDate.getMonth()+1) + "/" + sDate.getDate() + "/" + sDate.getFullYear());
+            $('#endLabel').text("Please enter a date before " + (eDate.getMonth()+1) + "/" + eDate.getDate() + "/" + eDate.getFullYear());
+        }
+    });  
 }
  
 function lastSong() {
@@ -169,5 +193,79 @@ $(document).ready(function(){
                 }
         });  
     });
+    getDateRange();
     lastSong();
+
+    // if text input, startField value is not empty show the "X" button
+    validStartDate = minStartDate;
+    $("#startField").keyup(function() {
+        $("#x").fadeIn();
+
+        userStartDate = new Date($.trim($("#startField").val()));
+        if((userStartDate.getMonth()+1) && userStartDate.getDate() && userStartDate.getFullYear() 
+                && userStartDate.getFullYear() > 2013 && userStartDate.getFullYear() <= new Date().getFullYear()) {
+            if (Date.parse(userStartDate) >= minStartDate*1000 && Date.parse(userStartDate) <= maxEndDate*1000 && Date.parse(userStartDate) < validEndDate*1000) {
+                $('#thegraph').fadeTo('slow',0, function() {
+                    validStartDate = Date.parse(userStartDate)/1000;
+                    toD3Format(Date.parse(userStartDate)/1000, validEndDate);
+                });
+                
+            }
+        }
+        if ($.trim($("#startField").val()) == "") {
+            $("#x").fadeOut();
+            $('#thegraph').fadeTo('slow',0, function() {
+                toD3Format(minStartDate, validEndDate);
+                validStartDate = minStartDate;
+            });
+        }
+    });
+    // on click of "X", delete input field value and hide "X"
+    $("#x").click(function() {
+        $("#startField").val("");
+        $(this).hide();
+        $('#thegraph').fadeTo('slow',0, function() {
+            toD3Format(minStartDate, validEndDate);
+            validStartDate = minStartDate;
+        });
+    });
+
+    // if text input, startField value is not empty show the "X" button
+    $("#endField").keyup(function() {
+        $("#x2").fadeIn();
+
+        userEndDate = new Date($.trim($("#endField").val()));
+        if((userEndDate.getMonth()+1) && userEndDate.getDate() && userEndDate.getFullYear() 
+                && userEndDate.getFullYear() > 2013 && userEndDate.getFullYear() <= new Date().getFullYear()) {
+            if (Date.parse(userEndDate) > minStartDate*1000 && Date.parse(userEndDate) <= maxEndDate*1000 && Date.parse(userEndDate) > validStartDate*1000) {
+                $('#thegraph').fadeTo('slow',0, function() {
+                    validEndDate = Date.parse(userEndDate)/1000;
+                    toD3Format(validStartDate, Date.parse(userEndDate)/1000);
+                });
+                
+            }
+        }
+        if ($.trim($("#endField").val()) == "") {
+            $("#x2").fadeOut();
+            $('#thegraph').fadeTo('slow',0, function() {
+                toD3Format(validStartDate, maxEndDate);
+                validEndDate = maxEndDate;
+            });
+        }
+    });
+    // on click of "X", delete input field value and hide "X"
+    $("#x2").click(function() {
+        $("#endField").val("");
+        $(this).hide();
+        $('#thegraph').fadeTo('slow',0, function() {
+            toD3Format(validStartDate, maxEndDate);
+            validEndDate = maxEndDate;
+        });
+    });
+
+
+
+    $('#startEndDate').submit(function() {
+        return false;
+    });
 }); 

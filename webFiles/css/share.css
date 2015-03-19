@@ -10,7 +10,7 @@ body {
     text-align: center;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 820px) {
     #thegraph {
         display:none;
     }
@@ -20,9 +20,42 @@ body {
     .lead2 {
         text-align: center;
     }
+    #thegraph {
+        display:none;
+    }
+    #dateContainer {
+        display: none;
+
+    }    
+    #startLabel {
+        display: none;
+    }
+
+    #startField {
+        display: none;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete { 
+        display: none;
+    }
+
+    #endLabel {
+        display: none;
+    }
+
+    #endField {
+        display: none;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete2 { 
+        display: none;
+    }
 
 }
-@media (min-width: 641px) {
+
+@media (min-width: 821px) and (max-width: 1024px) {
     main#content {
         font-size: 14px;
     }
@@ -39,8 +72,80 @@ body {
         text-align: center;
         color: white;
     }  
+
+    #startLabel {
+        color: white;
+        position: absolute;
+        bottom: -80px;
+    }
+
+    #startField {
+        width:300px; 
+        height:30px; 
+        line-height:27px;
+        text-indent:10px; 
+        font-size:1em; 
+        color:#333; 
+        background: #fff; 
+        border:solid 1px #d9d9d9; 
+        border-top:solid 1px #c0c0c0; 
+        border-right:none;
+        position: absolute;
+        bottom: -105px;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete { 
+        width:16px;
+        height:29px; 
+        line-height:27px; 
+        padding:0 0px 0 10px;
+        font-family: "Lucida Sans", "Lucida Sans Unicode",sans-serif;
+        font-size:22px; 
+        background: transparent;  
+        border-left:none;
+        position: absolute;
+        left: 270px;
+        bottom: -104px;
+    }
+
+    #endLabel {
+        color: white;
+        position: absolute;
+        bottom: -150px;
+    }
+
+    #endField {
+        width:300px; 
+        height:30px; 
+        line-height:27px;
+        text-indent:10px; 
+        font-size:1em; 
+        color:#333; 
+        background: #fff; 
+        border:solid 1px #d9d9d9; 
+        border-top:solid 1px #c0c0c0; 
+        border-right:none;
+        position: absolute;
+        bottom: -175px;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete2 { 
+        width:16px;
+        height:29px; 
+        line-height:27px; 
+        padding:0 0px 0 10px;
+        font-family: "Lucida Sans", "Lucida Sans Unicode",sans-serif;
+        font-size:22px; 
+        background: transparent;  
+        border-left:none;
+        position: absolute;
+        left: 270px;
+        bottom: -175px;
+    }
 }
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
     main#content {
         font-size: 18px;
     }
@@ -57,6 +162,96 @@ body {
         text-align: center;
         color: white;
     }  
+    
+    #startLabel {
+        color: white;
+        position: absolute;
+        font-size:.75em; 
+        bottom: -535px;
+        left: 10px;
+    }
+
+
+    #startField {
+        width:300px; 
+        height:30px; 
+        line-height:27px;
+        text-indent:10px; 
+        font-size:.75em; 
+        color:#333; 
+        background: #fff; 
+        border:solid 1px #d9d9d9; 
+        border-top:solid 1px #c0c0c0; 
+        border-right:none;
+        position: absolute;
+        bottom: -560px;
+        left: 10px;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete { 
+        width:16px;
+        height:29px; 
+        line-height:27px; 
+        padding:0 0px 0 10px;
+        font-family: "Lucida Sans", "Lucida Sans Unicode",sans-serif;
+        font-size:22px; 
+        background: transparent;  
+        border-left:none;
+        position: absolute;
+        left: 280px;
+        bottom: -560px;
+    }
+
+    #endLabel {
+        color: white;
+        position: absolute;
+        font-size:.75em; 
+        left: 330px;
+        bottom: -535px;
+    }
+
+    #endField {
+        width:300px; 
+        height:30px; 
+        line-height:27px;
+        text-indent:10px; 
+        font-size:.75em; 
+        color:#333; 
+        background: #fff; 
+        border:solid 1px #d9d9d9; 
+        border-top:solid 1px #c0c0c0; 
+        border-right:none;
+        position: absolute;
+        left: 330px;
+        bottom: -560px;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete2 { 
+        width:16px;
+        height:29px; 
+        line-height:27px; 
+        padding:0 0px 0 10px;
+        font-family: "Lucida Sans", "Lucida Sans Unicode",sans-serif;
+        font-size:22px; 
+        background: transparent;  
+        border-left:none;
+        position: absolute;
+        left: 600px;
+        bottom: -560px;
+    }
+
+    /* Set default state of "X" and hide it */
+    #delete2 #x2 {
+        color:#A1B9ED; 
+        cursor:pointer;
+        display:none;
+    }
+    /* Set the hover state of "X" */
+    #delete2 #x2:hover {
+        color:#36c;
+    }
 }
 @media (min-width: 1441px) {
     .lead {
@@ -71,8 +266,88 @@ body {
         font-size: 23px;
         text-align: center;
         color: white;
-    }    
+    }   
+
+    #startLabel {
+        color: white;
+        position: absolute;
+        right: 336px;
+        bottom: -52px;
+    }
+
+
+    #startField {
+        width:250px; 
+        height:20px; 
+        line-height:20px;
+        text-indent:10px; 
+        font-size:1em; 
+        color:#333; 
+        background: #fff; 
+        border:solid 1px #d9d9d9; 
+        border-top:solid 1px #c0c0c0; 
+        border-right:none;
+        position: absolute;
+        right: 320px;
+        bottom: -65px;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete { 
+        width:16px;
+        height:29px; 
+        line-height:27px; 
+        padding:0 0px 0 10px;
+        font-family: "Lucida Sans", "Lucida Sans Unicode",sans-serif;
+        font-size:22px; 
+        background: transparent;  
+        border-left:none;
+        position: absolute;
+        right: 332px;
+        bottom: -69px;
+    }
+
+    #endLabel {
+        color: white;
+        position: absolute;
+        right: 62px;
+        bottom: -50px;
+    }
+
+    #endField {
+        width:250px; 
+        height:20px; 
+        line-height:20px;
+        text-indent:10px; 
+        font-size:1em; 
+        color:#333; 
+        background: #fff; 
+        border:solid 1px #d9d9d9; 
+        border-top:solid 1px #c0c0c0; 
+        border-right:none;
+        position: absolute;
+        right: 50px;
+        bottom: -65px;
+    }
+
+    /* Style the "X" text button next to the search input field */
+    #delete2 { 
+        width:16px;
+        height:29px; 
+        line-height:27px; 
+        padding:0 0px 0 10px;
+        font-family: "Lucida Sans", "Lucida Sans Unicode",sans-serif;
+        font-size:22px; 
+        background: transparent;  
+        border-left:none;
+        position: absolute;
+        right: 60px;
+        bottom: -69px;
+    }
 }
+
+
+
 main#content {
     padding: 20px 15px;
     color:white;    
@@ -85,4 +360,34 @@ h1 {
     color:white;
     opacity:0;
     font-size: 150%;
+}
+
+/* div container containing the form  */
+#dateContainer {
+    margin:20px;
+    display: none;
+    font-family: sans-serif;
+    position: relative;
+}
+
+/* Set default state of "X" and hide it */
+#delete #x {
+    color:#A1B9ED; 
+    cursor:pointer;
+    display:none;
+}
+/* Set the hover state of "X" */
+#delete #x:hover {
+    color:#36c;
+}
+
+/* Set default state of "X" and hide it */
+#delete2 #x2 {
+    color:#A1B9ED; 
+    cursor:pointer;
+    display:none;
+}
+/* Set the hover state of "X" */
+#delete2 #x2:hover {
+    color:#36c;
 }
