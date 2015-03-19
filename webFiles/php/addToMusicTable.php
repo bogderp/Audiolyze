@@ -1,10 +1,12 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "audiolyze");
+    include_once('config.php');
+
+    $conn = new mysqli($host, $user, $pass, $base);
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    } 
+    }
     $token = $_SESSION['token'];
     $userID = $_SESSION['tableKey'];
     require_once('../facebook/autoload.php');

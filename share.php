@@ -1,11 +1,13 @@
 <?php
     session_start();
-    $conn = new mysqli("localhost", "publicuser", "srQ-kdq-5Jt-Mwp", "audiolyze");
+    include_once('webFiles/php/config.php');
+
+    $conn = new mysqli($host, $user, $user, $base);
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    } 
-
+    }
+    
     $userID = base_convert($_GET['i'], 18, 13);
 
     $_SESSION['tableKey'] = $userID;
