@@ -70,6 +70,7 @@ function topArtists() {
         url: "webFiles/php/topArtists.php",
         dataType: 'json',
         success: function(data) {
+            $('.text').html("");
             toD3Format();
             otherArtists = data[data.length-4][1];
             totalPlays = data[data.length-3];
@@ -133,6 +134,7 @@ function avgTimeBtwnPlays() {
     $.ajax({
         url: "webFiles/php/avgTimeBtwnPlays.php",
         success: function() {
+            $('.text').html("Determining top artists...");
             topArtists();
         }
     });  
@@ -147,6 +149,7 @@ function getDateRange() {
         url: "webFiles/php/getDateRange.php",
         dataType: "JSON",
         success: function(data) {
+            $('.text').html("Calculating average...");
             minStartDate = data[0];
             validStartDate = minStartDate;
             var sDate = new Date(minStartDate*1000);
@@ -172,6 +175,7 @@ function addToGraphTable() {
     $.ajax({
         url: "webFiles/php/addToGraphTable.php",
         success: function(data) {
+            $('.text').html("Checking Range...");
             getDateRange();
             avgTimeBtwnPlays();
         }
@@ -399,10 +403,12 @@ $(document).ready(function(){
         $('#playstat').fadeOut('slow');
         $('.fb-like-box').fadeOut('slow');  
         $('#addToTable').fadeOut('slow', function() {
+            $('.text').html("Gathering music data from Facebook...");
             $('.loading').fadeIn('slow');
             $.ajax({
                 url: "webFiles/php/addToMusicTable.php",
                 success: function() {
+                    $('.text').html("Interpreting data...");
                     lastSong();
                     addToGraphTable();                    
                 }
