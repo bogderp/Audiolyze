@@ -1,9 +1,14 @@
+var mobile = 0;
+
 function dynamicHeight() {
     var height = $(window).height();
-    //heightGraph = parseInt(height * 0.90) + 'px';
+    var width = $(window).width();
+    if (width < 661) {mobile = 1}else{mobile = 0};
     height = parseInt(height) + 'px';
     $("main").css('height',height);
+    $(".mainView").css('height',height);
     //$(".chart.full").css('height',heightGraph);
+    //heightGraph = parseInt(height * 0.90) + 'px';
 }
 
 var colors = d3.scale.category20();
@@ -282,7 +287,7 @@ function checkPermissions(){
                             $('#addToTable').fadeIn('slow');
                             $('#fbShare').attr("onclick","fbShare('http://www.audiolyze.com/share.php"  + data[2] + "')");
                             $('#viewStats').attr("href","http://www.audiolyze.com/share.php" + data[2]);
-                            $('#statsDropdown').fadeIn('slow');
+                            if (!mobile){$('#statsDropdown').fadeIn('slow');}
                         } else if (data[0] == 2){
                             lastSong();
                             buildGraphTable();
@@ -349,6 +354,29 @@ $(document).ready(function(){
                 }
         });  
     });
+
+    isVisible = 0;
+    $('.mobile').click(function(){
+        if(!isVisible) {
+            $('.mobileMenu li').fadeIn('slow');
+            isVisible = 1;
+        } else {
+            $('.mobileMenu li').fadeOut('slow');
+            isVisible = 0;
+        }
+        
+    })
+
+    $('#mobileimg').click(function(){
+        if(!isVisible) {
+            $('.mobileMenu li').fadeIn('slow');
+            isVisible = 1;
+        } else {
+            $('.mobileMenu li').fadeOut('slow');
+            isVisible = 0;
+        }
+        
+    })
 
     $('#requestForm').on('submit',function(e) {
         e.preventDefault();
@@ -454,4 +482,6 @@ $(document).ready(function(){
     $('#startEndDate').submit(function() {
   		return false;
 	});
+
+
 }); 

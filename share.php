@@ -38,31 +38,31 @@
     <link rel="stylesheet" type="text/css" href="webFiles/css/share.css">
     <link href="webFiles/css/nv.d3.css" rel="stylesheet" type="text/css">
     <link href="webFiles/css/graph.css" rel="stylesheet" type='text/css'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
-
   <body>    
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Audiolyze</a>
+    <nav class="navbar">
+        <div class="container">
+            <div style="position:absolute;">
+                <div class="brand" onclick="location.href='index.html" style="color:#FF8A18;">Audiolyze</div>
+                <a class="agit" href="https://github.com/bogdanpozderca/audiolyze"><img class="github" width="25px" height="25px" src="imgFiles/github.png"></a>
+                <ul class="menu-items">
+                    <li class="menu"><a href="index.html">Home</a></li>
+                    <li class="menu"><a href="FAQ.html">FAQ</a></li>
+                    <li class="menu"><a href="#requests" data-toggle="modal" data-target="#requests">Submit A Request</a></li>
+                </ul>
+            </div>
+            <li class="mobileMenu"><a href="#mobile"><img id="mobileimg" width="30px" height="30px" src="imgFiles/mobileMenu.png"></a>
+                <ul>
+                    <li class="mobile"><a href="index.html">Home</a></li>
+                    <li class="mobile"><a href="FAQ.html">FAQ</a></li>
+                    <li class="mobile"><a href="#requests" data-toggle="modal" data-target="#requests">Submit A Request</a></li>  
+                </ul>
+            </li>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <!--<li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>-->
-            <li><a href="FAQ.html">FAQ</a></li>
-            <li><a href="#requests" data-toggle="modal" data-target="#requests">Submit A Request</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
     </nav>
+
+
 
     <main class="bs-docs-masthead" id="content" role="main">
          <div class="row">

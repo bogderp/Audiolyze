@@ -10,7 +10,7 @@ body {
     text-align: center;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 660px) {
     #thegraph {
         display:none;
     }
@@ -53,9 +53,85 @@ body {
         display: none;
     }
 
+    .navbar ul li.menu {
+        display: none;
+    }
+
+    .brand {
+        top: 11px;
+        left: 10px;
+        font-size: 150%;
+    }
+
+    #icons {
+        left: 210px;
+    }
+
+    .mobileMenu {
+        position: absolute;
+        font-family: 'Maven Pro';
+        width: 100%;
+        top: 9px;
+        right: 0px;
+        padding-right: 10px;
+        display: block;
+    }
+
+    .mobileMenu ul {
+        position: absolute;
+        width: 100%;
+        top: 50px;
+        left: 0px;
+        padding-bottom: 15px;
+        margin-top: -20px;
+        text-align: left;
+    }
+    .mobileMenu li {
+        display: none;
+        background-color: black;
+        margin-left: -35px;
+        font-size: 130%;
+        padding: 5px 0px 5px 10px;
+    }
+
+    .mobileMenu li a {
+        display: block;
+    }
+
+    .mobileMenu li:hover {
+        color: black;
+    }
+
+}
+@media (min-width: 661px) {
+    .navbar li {
+        font-size: 110%;
+        font-family: 'Maven Pro';
+        font-weight: 400px;
+        display: inline;
+        color: #18453B;
+        padding: 0px 10px 0px 10px;
+    }
+
+    .menu-items{
+        display: inline-block;
+        text-align: left;
+    }
+
+    .brand {
+        font-size: 130%;
+        top: 13px;
+    }
+
+    .mobileMenu {
+        display: none;
+        font-size: 110%;
+    }
+    .mobileMenu ul {display: none;}
+    #mobileimg {display: none;}
 }
 
-@media (min-width: 821px) and (max-width: 1024px) {
+@media (min-width: 661px) and (max-width: 1024px) {
     main#content {
         font-size: 14px;
     }
@@ -390,4 +466,84 @@ h1 {
 /* Set the hover state of "X" */
 #delete2 #x2:hover {
     color:#36c;
+}
+
+@font-face {
+  font-family: 'REBold';
+  src: url('../fonts/REBold.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('../fonts/REBold.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+.brand {
+    font-family:'REBold', sans-serif;
+    display: inline-block;
+    margin-top: 13px;
+    top: 13px;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+}
+
+.brand:hover {
+    cursor: pointer;
+    transition: opacity .25s ease-in-out;
+    opacity: .70;
+}
+
+a {
+    color: white;
+}
+
+a:active {
+    color: white;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF8A18;
+}
+
+a:focus {
+    color: white;
+}
+
+li {
+    list-style-type: none;
+}
+
+.agit {
+    display: inline-block;
+}
+
+.github {
+    margin-bottom: 7px;
+    margin-left: 4px;
+}
+
+.github:hover {
+    transition: opacity .25s ease-in-out;
+    opacity: .7;
+    cursor: pointer;
+}
+
+.navbar {
+    position: fixed;
+    z-index: 999;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    text-align: right;
+    background-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    height: 50px;
+    top: 0;
+    right: 0;
+    left: 0;
 }

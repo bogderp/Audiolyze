@@ -196,6 +196,29 @@ $(document).ready(function(){
     getDateRange();
     lastSong();
 
+    isVisible = 0;
+    $('.mobile').click(function(){
+        if(!isVisible) {
+            $('.mobileMenu li').fadeIn('slow');
+            isVisible = 1;
+        } else {
+            $('.mobileMenu li').fadeOut('slow');
+            isVisible = 0;
+        }
+        
+    })
+
+    $('#mobileimg').click(function(){
+        if(!isVisible) {
+            $('.mobileMenu li').fadeIn('slow');
+            isVisible = 1;
+        } else {
+            $('.mobileMenu li').fadeOut('slow');
+            isVisible = 0;
+        }
+        
+    })
+
     // if text input, startField value is not empty show the "X" button
     validStartDate = minStartDate;
     $("#startField").keyup(function() {
