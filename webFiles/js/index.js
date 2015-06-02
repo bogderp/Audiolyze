@@ -295,6 +295,13 @@ function checkPermissions(){
                         } else if (data[0] == 2){
                             lastSong();
                             buildGraphTable();
+                        } else if (data[0] == 5){
+                            $('#directions').fadeOut('slow',function(){
+                                $('#directions').replaceWith("<p id=\"directions\" style=\"display:none\">" +
+                                    "Please go to your music client and allow activity <br> sharing with Facebook. After a few days " +
+                                    "come back to view your music history <br></p>");
+                                $('#directions').fadeIn('slow');
+                            });
                         } else {
                             $('#directions').fadeOut('slow',function(){
                                 $('#directions').replaceWith("<p id=\"directions\" style=\"display:none\">" +

@@ -93,17 +93,33 @@
                     echo json_encode($reportArray);
                 }
             } else {
-                $shareCode = mysql_escape_string("?i=" . base_convert($userID, 13, 18));
-                
-                $userInfo = "INSERT INTO userData (name, userID, currentLoginTime, shareCode)
-                    VALUES ('$userName', '$userID', '$currentTime', '$shareCode')";
-                $conn->query($userInfo);
-                //buildDatabase
-                //formatGraphData
-                //lastSong
-                //topArtists
-                array_push($reportArray,4);
-                echo json_encode($reportArray);
+
+				$secReq = new FacebookRequest(
+				    $session, 'GET', '/'.$userID.'/music.listens?limit=15');
+				$response2 = $secReq->execute();
+				$reqObject2 = $response2->getGraphObject();               
+
+				$songArray = $reqObject2->getProperty('data');
+
+				if (count($songArray)) {
+	                $shareCode = mysql_escape_string("?i=" . base_convert($userID, 13, 18));
+	                
+	                $userInfo = "INSERT INTO userData (name, userID, currentLoginTime, shareCode)
+	                    VALUES ('$userName', '$userID', '$currentTime', '$shareCode')";
+	                $conn->query($userInfo);
+	               
+	                //buildDatabase
+	                //formatGraphData
+	                //lastSong
+	                //topArtists
+	                array_push($reportArray,4);
+	                echo json_encode($reportArray);
+				} else {
+	                array_push($reportArray,5);
+	                echo json_encode($reportArray);
+				}
+
+
             }
        
         } catch(FacebookRequestException $e) {
