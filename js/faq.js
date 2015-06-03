@@ -24,7 +24,7 @@ $(document).ready(function(){
         requestData = $(this).serialize();
         console.log(requestData);
         $.ajax({
-                url: "webFiles/php/request.php",
+                url: "php/request.php",
                 type: "POST",
                 data: requestData,
                 success: function(data) {

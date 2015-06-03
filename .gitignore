@@ -1,5 +1,8 @@
 
-webFiles/php/config.php
+php/config.php
+php/fbConfig.php
+
+._*
 .DS_Store
 ._.DS_Store
 ._config.php

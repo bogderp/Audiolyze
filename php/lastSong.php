@@ -3,13 +3,6 @@
 	$userID = $_SESSION['tableKey'];
     include_once('config.php');
 
-    $conn = new mysqli($host, $user, $pass, $base);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-
     $result = $conn->query("SELECT publishTime, songName, artistName, 
     	albumURL FROM " . $userID . "_musicdata ORDER BY publishTime DESC");
     $lastArray = array();

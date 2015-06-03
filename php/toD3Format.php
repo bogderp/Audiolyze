@@ -6,12 +6,6 @@
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
 
-    $conn = new mysqli($host, $user, $pass, $base);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
 	$sql = "SELECT `COLUMN_NAME` 
 		FROM `INFORMATION_SCHEMA`.`COLUMNS` 
 		WHERE `TABLE_SCHEMA`='audiolyze' 

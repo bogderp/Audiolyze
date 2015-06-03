@@ -3,12 +3,6 @@
 	$userID = $_SESSION['tableKey'];
     include_once('config.php');
 
-    $conn = new mysqli($host, $user, $pass, $base);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
     $sql = "CREATE TABLE " . $userID . "_graphdata (
         artist VARCHAR(100) NULL
         )";

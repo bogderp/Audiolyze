@@ -129,7 +129,7 @@ main#content {
     padding: 20px 15px;
     color:white;
     text-align: center;          
-    background-image: url("../../imgFiles/FAQbackdrop.jpeg");
+    background-image: url("../../img/FAQbackdrop.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
 }

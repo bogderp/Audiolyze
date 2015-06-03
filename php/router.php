@@ -1,24 +1,9 @@
 <?php
     session_start();
-    include_once('config.php');
+    require_once('config.php');
+    require_once('fbConfig.php');
 
-    $conn = new mysqli($host, $user, $pass, $base);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    require_once('../facebook/autoload.php');
-
-    use Facebook\FacebookSession; 
-    use Facebook\FacebookJavaScriptLoginHelper;
-    use Facebook\FacebookRequest;
-    use Facebook\GraphUser;
-    use Facebook\FacebookRequestException;
-
-    FacebookSession::setDefaultApplication('171546376229575', '41345f543846339dba9079ddf0157df9');
-
-    $helper = new FacebookJavaScriptLoginHelper();
+    $helper = new Facebook\FacebookJavaScriptLoginHelper();
     try {
         $session = $helper->getSession();
         $token = $session->getAccessToken() . "";
@@ -31,7 +16,7 @@
 
     if($session) {
         try {
-            $userReq = new FacebookRequest(
+            $userReq = new Facebook\FacebookRequest(
                 $session, 'GET', '/me?fields=id,name');
             $response = $userReq->execute();
             $reqObject = $response->getGraphObject();  
@@ -94,7 +79,7 @@
                 }
             } else {
 
-				$secReq = new FacebookRequest(
+				$secReq = new Facebook\FacebookRequest(
 				    $session, 'GET', '/'.$userID.'/music.listens?limit=15');
 				$response2 = $secReq->execute();
 				$reqObject2 = $response2->getGraphObject();               
@@ -122,7 +107,7 @@
 
             }
        
-        } catch(FacebookRequestException $e) {
+        } catch(Facebook\FacebookRequestException $e) {
 
             echo "Exception occured, code: " . $e->getCode();
             echo " with message: " . $e->getMessage();

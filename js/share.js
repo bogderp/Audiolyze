@@ -47,7 +47,7 @@ function defaultChartConfig(container, data, useGuideline) {
 
 function toD3Format(startDate, endDate) {
     $.ajax({
-        url: "webFiles/php/toD3Format.php",
+        url: "php/toD3Format.php",
         data: {'startDate':startDate,'endDate':endDate},
         type: "POST",
         dataType: 'JSON',
@@ -75,7 +75,7 @@ function restOfArtists(data) {
 
 function topArtists() {
     $.ajax({
-        url: "webFiles/php/topArtists.php",
+        url: "php/topArtists.php",
         dataType: 'json',
         success: function(data) {
             toD3Format();
@@ -140,7 +140,7 @@ var maxEndDate = "";
 var validEndDate = "";
 function getDateRange() {
     $.ajax({
-        url: "webFiles/php/getDateRange.php",
+        url: "php/getDateRange.php",
         dataType: "JSON",
         success: function(data) {
             minStartDate = data[0];
@@ -157,7 +157,7 @@ function getDateRange() {
  
 function lastSong() {
     $.ajax({
-            url: "webFiles/php/lastSong.php",
+            url: "php/lastSong.php",
             success: function(data) {
                 var lastSongArray = JSON.parse(data);
                 d = new Date(lastSongArray[1]);
@@ -184,7 +184,7 @@ $(document).ready(function(){
         requestData = $(this).serialize();
         console.log(requestData);
         $.ajax({
-                url: "webFiles/php/request.php",
+                url: "php/request.php",
                 type: "POST",
                 data: requestData,
                 success: function(data) {

@@ -43,7 +43,7 @@ function defaultChartConfig(container, data, useGuideline) {
 
 function toD3Format(startDate, endDate) {
     $.ajax({
-        url: "webFiles/php/toD3Format.php",
+        url: "php/toD3Format.php",
         data: {'startDate':startDate,'endDate':endDate},
         type: "POST",
         dataType: 'JSON',
@@ -67,7 +67,7 @@ function toD3Format(startDate, endDate) {
 
 function topArtists() {
     $.ajax({
-        url: "webFiles/php/topArtists.php",
+        url: "php/topArtists.php",
         dataType: 'json',
         success: function(data) {
             $('.text').html("");
@@ -132,7 +132,7 @@ function topArtists() {
 
 function avgTimeBtwnPlays() {
     $.ajax({
-        url: "webFiles/php/avgTimeBtwnPlays.php",
+        url: "php/avgTimeBtwnPlays.php",
         success: function() {
             $('.text').html("Determining top artists...");
             topArtists();
@@ -146,7 +146,7 @@ var maxEndDate = "";
 var validEndDate = "";
 function getDateRange() {
     $.ajax({
-        url: "webFiles/php/getDateRange.php",
+        url: "php/getDateRange.php",
         dataType: "JSON",
         success: function(data) {
             $('.text').html("Calculating average...");
@@ -164,7 +164,7 @@ function getDateRange() {
 
 function buildGraphTable() {
     $.ajax({
-        url: "webFiles/php/buildGraphTable.php",
+        url: "php/buildGraphTable.php",
         success: function() {
             avgTimeBtwnPlays();
         }
@@ -173,7 +173,7 @@ function buildGraphTable() {
 
 function addToGraphTable() {
     $.ajax({
-        url: "webFiles/php/addToGraphTable.php",
+        url: "php/addToGraphTable.php",
         success: function(data) {
             $('.text').html("Checking Range...");
             getDateRange();
@@ -184,7 +184,7 @@ function addToGraphTable() {
 
 function lastSong() {
     $.ajax({
-            url: "webFiles/php/lastSong.php",
+            url: "php/lastSong.php",
             success: function(data) {
                 var lastSongArray = JSON.parse(data);
                 d = new Date(lastSongArray[1]);
@@ -275,7 +275,7 @@ function checkPermissions(){
                 $('#fblogin').fadeOut('slow');
                 $('#grantPerm').fadeOut('slow');
                 $.ajax({
-                    url: "webFiles/php/router.php",
+                    url: "php/router.php",
                     dataType: 'json',
                     success: function(data) {
                         console.log(data[0]);
@@ -326,7 +326,7 @@ function removeData() {
     $('#addToTable').fadeOut('slow');
     $('#status').fadeOut('slow');
     $.ajax({
-        url: "webFiles/php/deleteData.php",
+        url: "php/deleteData.php",
         success: function() { 
             console.log("Everything Deleted");
             FB.logout();
@@ -355,7 +355,7 @@ $(document).ready(function(){
         });
 
         $.ajax({
-                url: "webFiles/php/buildMusicTable.php",
+                url: "php/buildMusicTable.php",
                 data: {'data':userDefined},
                 success: function(data) {
                     $('.loading').fadeOut('fast');
@@ -393,7 +393,7 @@ $(document).ready(function(){
         e.preventDefault();
         requestData = $(this).serialize();
         $.ajax({
-                url: "webFiles/php/request.php",
+                url: "php/request.php",
                 type: "POST",
                 data: requestData,
                 success: function(data) {
@@ -413,7 +413,7 @@ $(document).ready(function(){
             $('.text').html("Gathering music data from Facebook...");
             $('.loading').fadeIn('slow');
             $.ajax({
-                url: "webFiles/php/addToMusicTable.php",
+                url: "php/addToMusicTable.php",
                 success: function() {
                     $('.text').html("Interpreting data...");
                     lastSong();

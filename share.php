@@ -1,11 +1,6 @@
 <?php
     session_start();
-    include_once('webFiles/php/config.php');
-    $conn = new mysqli($host, $user, $pass, $base);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include_once('php/config.php');
     
     $userID = base_convert($_GET['i'], 18, 13);
 
@@ -24,20 +19,20 @@
     <meta name="description" content="">
     <meta name="author" content="Bogdan Pozderca">
     <meta property="og:title" content='Audiolyzed Graph and Statistics' />
-    <meta property="og:image" content="http://www.audiolyze.com/imgFiles/metaImage.png">
+    <meta property="og:image" content="http://www.audiolyze.com/img/metaImage.png">
     <meta property="og:description" content="Check out my analyzed music history! You can even analyze your own for free!" />
     <meta property="og:url" content="<?php echo 'http://www.audiolyze.com/share.php?i=' . $_GET['i']; ?>"/>
-    <link rel="shortcut icon" href="imgFiles/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="imgFiles/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 
 
-	<?php echo "<title>" . $name . "'s Audiolyze Graph" . "</title>"; ?>
+    <?php echo "<title>" . $name . "'s Audiolyze Graph" . "</title>"; ?>
 
     <!-- Bootstrap core CSS -->
-    <link href="webFiles/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="webFiles/css/share.css">
-    <link href="webFiles/css/nv.d3.css" rel="stylesheet" type="text/css">
-    <link href="webFiles/css/graph.css" rel="stylesheet" type='text/css'>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/share.css">
+    <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+    <link href="css/graph.css" rel="stylesheet" type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
   <body>    
@@ -45,14 +40,14 @@
         <div class="container">
             <div style="position:absolute;">
                 <div class="brand" onclick="location.href='index.html" style="color:#FF8A18;">Audiolyze</div>
-                <a class="agit" href="https://github.com/bogdanpozderca/audiolyze"><img class="github" width="25px" height="25px" src="imgFiles/github.png"></a>
+                <a class="agit" href="https://github.com/bogdanpozderca/audiolyze"><img class="github" width="25px" height="25px" src="img/github.png"></a>
                 <ul class="menu-items">
                     <li class="menu"><a href="index.html">Home</a></li>
                     <li class="menu"><a href="FAQ.html">FAQ</a></li>
                     <li class="menu"><a href="#requests" data-toggle="modal" data-target="#requests">Submit A Request</a></li>
                 </ul>
             </div>
-            <li class="mobileMenu"><a href="#mobile"><img id="mobileimg" width="30px" height="30px" src="imgFiles/mobileMenu.png"></a>
+            <li class="mobileMenu"><a href="#mobile"><img id="mobileimg" width="30px" height="30px" src="img/mobileMenu.png"></a>
                 <ul>
                     <li class="mobile"><a href="index.html">Home</a></li>
                     <li class="mobile"><a href="FAQ.html">FAQ</a></li>
@@ -88,14 +83,14 @@
                 <div id="delete2"><span id="x2">x</span></div>
             </form>
         </div>    
-	    <div class='chart full' id='thegraph'>Top Artists<svg></svg></div>    
-	    
-	     <div class="bodyContainer">
-	        <div id="lastsong" style="display:none"></div>
-	        
-	        <div id="playstat" style="padding-top: 20px; display:none"></div>
+        <div class='chart full' id='thegraph'>Top Artists<svg></svg></div>    
+        
+         <div class="bodyContainer">
+            <div id="lastsong" style="display:none"></div>
+            
+            <div id="playstat" style="padding-top: 20px; display:none"></div>
             <div id="playstat2" style="padding-top: 20px; display:none"></div>
-	    </div><!-- /.bodyContainer -->    
+        </div><!-- /.bodyContainer -->    
         
         <div class="fb-like-box" 
             data-href="https://www.facebook.com/Audiolyze" 
@@ -160,10 +155,10 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="webFiles/dist/js/bootstrap.min.js"></script>
-    <script src="webFiles/js/d3.v3.js"></script>
-    <script src="webFiles/js/nv.d3.js"></script>
-    <script src="webFiles/js/share.js" type="text/javascript"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="js/d3.v3.js"></script>
+    <script src="js/nv.d3.js"></script>
+    <script src="js/share.js" type="text/javascript"></script>
   </body>
 </html>
 

@@ -2,28 +2,14 @@
     session_start();
     include_once('config.php');
 
-    $conn = new mysqli($host, $user, $pass, $base);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
     $token = $_SESSION['token'];
-    require_once('../facebook/autoload.php');
+    include_once('fbConfig.php');
 
-    use Facebook\FacebookSession; 
-    use Facebook\FacebookJavaScriptLoginHelper;
-    use Facebook\FacebookRequest;
-    use Facebook\GraphUser;
-    use Facebook\FacebookRequestException;
-
-    FacebookSession::setDefaultApplication('171546376229575', '41345f543846339dba9079ddf0157df9');
-
-    $session = new FacebookSession($token);
-
+    $session = new Facebook\FacebookSession($token);
     if($session) {
         try {
             $userPlays = $_GET['data'];
-            $initialReq = new FacebookRequest(
+            $initialReq = new Facebook\FacebookRequest(
                 $session, 'GET', '/me/music.listens?limit=' . $userPlays . '');
             $response = $initialReq->execute();
             $reqObject = $response->getGraphObject();               
@@ -61,7 +47,7 @@
                     $nextRequest .= ',';
                 } else {
                     try {  
-                        $songReq = new FacebookRequest(
+                        $songReq = new Facebook\FacebookRequest(
                             $session, 'GET', $nextRequest);
                         $response = $songReq->execute();
                         $songObject = $response->getGraphObject();
@@ -87,7 +73,7 @@
                             $conn->query($musicHistory);
 
                         }
-                    } catch(FacebookRequestException $e) {
+                    } catch(Facebook\FacebookRequestException $e) {
 
                         echo "Exception occured, code: " . $e->getCode();
                         echo " with message: " . $e->getMessage();
@@ -98,7 +84,7 @@
                 } 
             }  
 
-        } catch(FacebookRequestException $e) {
+        } catch(Facebook\FacebookRequestException $e) {
 
             echo "Exception occured, code: " . $e->getCode();
             echo " with message: " . $e->getMessage();
