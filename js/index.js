@@ -115,6 +115,7 @@ function topArtists() {
                 ("On average, in the past " + totalPlays + " listens you listened to a song every " +
                 (avgTimePlays/60).toFixed(2) + " minutes!");
             $('.loading').fadeOut('slow');
+            $('#directions').fadeOut('slow');
             $('#lastsong').fadeIn('slow', function () {
                 $('#playstat').fadeIn('slow');
                 $('#playstat2').fadeIn('slow');
@@ -236,7 +237,7 @@ window.fbAsyncInit = function() {
         appId      : '171546376229575',
         cookie     : true,
         xfbml      : true,
-        version    : 'v2.1'
+        version    : 'v2.2'
     });
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
@@ -293,6 +294,10 @@ function checkPermissions(){
                             $('#viewStats').attr("href","http://www.audiolyze.com/share.php" + data[2]);
                             if (!mobile){$('#statsDropdown').fadeIn('slow');}
                         } else if (data[0] == 2){
+                            $('#directions').replaceWith("<p id=\"directions\" style=\"display:none\">" +
+                                "There seems to have been a problem, rebuilding your statistics. " +
+                                "This will take a few minutes. <br></p>");
+                            $('#directions').fadeIn('slow');
                             lastSong();
                             buildGraphTable();
                         } else if (data[0] == 5){
@@ -411,10 +416,12 @@ $(document).ready(function(){
         $('.fb-like-box').fadeOut('slow');  
         $('#addToTable').fadeOut('slow', function() {
             $('.text').html("Gathering music data from Facebook...");
+            $('.subtext').html("This may take a while.")
             $('.loading').fadeIn('slow');
             $.ajax({
                 url: "php/addToMusicTable.php",
                 success: function() {
+                    $('.subtext').fadeOut('slow');
                     $('.text').html("Interpreting data...");
                     lastSong();
                     addToGraphTable();                    
