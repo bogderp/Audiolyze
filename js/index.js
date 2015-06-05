@@ -310,8 +310,8 @@ function checkPermissions(){
                         } else {
                             $('#directions').fadeOut('slow',function(){
                                 $('#directions').replaceWith("<p id=\"directions\" style=\"display:none\">" +
-                                    "Please choose the number of listens to query. <br> Wait time is " +
-                                    "greater with a greater chosen value <br></p>");
+                                    "Please choose the number of listens to query. <br> Wait time " +
+                                    "depends on the chosen value. <br></p>");
                                 $('#directions').fadeIn('slow');
                                 $('#playForm').fadeIn('slow');
                             });
